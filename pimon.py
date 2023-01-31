@@ -215,7 +215,7 @@ def config_json(what_config):
         data["icon"] = "mdi:speedometer"
         data["name"] = hostname + " CPU Usage"
         data["unit_of_measurement"] = "%"
-    elif what_config == "cpu_temp":d
+    elif what_config == "cpu_temp":
         data["icon"] = "hass:thermometer"
         data["name"] = hostname + " CPU Temperature"
         data["unit_of_measurement"] = "°C"
