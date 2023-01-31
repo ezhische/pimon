@@ -21,7 +21,7 @@ import yaml
 import paho.mqtt.client as mqtt
 
 
-parser = argparse.ArgumentParser(description="Pimon: Raspberry Pi MQTT monitor")
+parser = argparse.ArgumentParser(description="Pimon: Orange Pi MQTT monitor")
 parser.add_argument(
     "-c",
     "--config",
@@ -181,7 +181,10 @@ def get_manufacturer():
     if 'Raspberry' not in check_model_name():
         full_cmd = "cat /proc/cpuinfo  | grep 'vendor'| uniq"
         pretty_name = subprocess.Popen(full_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0].decode("utf-8")
-        pretty_name = pretty_name.split(':')[1]
+        if pretty_name == null:
+            pretty_name = 'Orange Pi'
+        else:
+            pretty_name = pretty_name.split(':')[1]
     else:
         pretty_name = 'Raspberry Pi'
     return(pretty_name)
@@ -208,11 +211,11 @@ def config_json(what_config):
 
     data["state_topic"] = f"{base_topic}/{what_config}"
     data["unique_id"] = hostname + "_" + what_config
-    if what_config == "cpuload":
+    if what_config == "cpu_load":
         data["icon"] = "mdi:speedometer"
         data["name"] = hostname + " CPU Usage"
         data["unit_of_measurement"] = "%"
-    elif what_config == "cputemp":
+    elif what_config == "cpu_temp":d
         data["icon"] = "hass:thermometer"
         data["name"] = hostname + " CPU Temperature"
         data["unit_of_measurement"] = "°C"
@@ -236,7 +239,7 @@ def config_json(what_config):
         data["icon"] = "mdi:speedometer"
         data["name"] = hostname + " CPU Clock Speed"
         data["unit_of_measurement"] = "MHz"
-    elif what_config == "uptime_days":
+    elif what_config == "uptime":
         data["icon"] = "mdi:calendar"
         data["name"] = hostname + " Uptime"
         data["unit_of_measurement"] = "days"
