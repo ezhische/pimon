@@ -22,7 +22,6 @@ Pimon ...
 but ...
 * is Python 3 only (Python 2 was officially depreciated on January 1 2020!)
 * has no automated installation scripts (yet?)
-* Home Assistant integration is still present but untested in this fork (I don't use it)
 
 The changes are heavily influenced by the design of [PiJuice MQTT](https://github.com/dalehumby/PiJuice-MQTT).
 
@@ -42,7 +41,7 @@ sudo apt install python3-pip python3-venv
 
 Clone the repository:
 ```bash
-git clone https://github.com/kobbejager/pimon.git
+git clone https://github.com/ezhische/pimon.git
 ```
 
 Create the virtual environment and install dependencies:
