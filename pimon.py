@@ -104,10 +104,9 @@ def check_diskusage(path):
 
 def check_cpu_load():
     # bash command to get cpu load from uptime command
-    p = subprocess.Popen("uptime", shell=True, stdout=subprocess.PIPE).communicate()[0]
-    cores = subprocess.Popen("nproc", shell=True, stdout=subprocess.PIPE).communicate()[0]
-    cpu_load = str(p).split("average:")[1].split(", ")[0].replace(' ', '').replace(',', '.')
-    cpu_load = float(cpu_load) / int(cores) * 100
+    p = subprocess.Popen("sar -u|grep Average:", shell=True, stdout=subprocess.PIPE).communicate()[0]
+    cpu_load = str(string).split("Average:")[1].split("    ")[8].replace(' ', '').replace(',', '.')
+    cpu_load = 100 - float(cpu_load)
     cpu_load = round(float(cpu_load), 1)
     return cpu_load
 
