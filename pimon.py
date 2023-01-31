@@ -181,7 +181,7 @@ def get_manufacturer():
     if 'Raspberry' not in check_model_name():
         full_cmd = "cat /proc/cpuinfo  | grep 'vendor'| uniq"
         pretty_name = subprocess.Popen(full_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0].decode("utf-8")
-        if pretty_name == null:
+        if pretty_name == Null:
             pretty_name = 'Orange Pi'
         else:
             pretty_name = pretty_name.split(':')[1]
