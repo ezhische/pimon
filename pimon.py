@@ -16,7 +16,9 @@ from random import randrange
 import argparse
 import os
 from datetime import datetime, timezone
+from psutil._common import bytes2human
 
+import psutil
 import yaml
 import paho.mqtt.client as mqtt
 
@@ -103,15 +105,8 @@ def check_diskusage(path):
 
 
 def check_cpu_load():
-    # bash command to get cpu load from uptime command
-    p = subprocess.Popen("sar -u 1 1|grep Average:", shell=True, stdout=subprocess.PIPE).communicate()[0]
-    if not p:
-        cpu_load = 0
-        print("Sysstat not found. Install sysstat package")
-    else:
-        cpu_load = str(p).split("Average:")[1].split("    ")[8].replace(' ', '').replace('\n', '.')[:-3]
-        cpu_load = 100 - float(cpu_load)
-        cpu_load = round(float(cpu_load), 1)
+    # PSutil command to get cpu load
+    cpu_load = psutil.cpu_percent(interval=None, percpu=False)
     return cpu_load
 
 
@@ -126,32 +121,27 @@ def check_voltage():
 
 
 def check_swap():
-    full_cmd = "free -t |grep -i swap | awk 'NR == 1 {print $3/$2*100}'"
-    swap = subprocess.Popen(full_cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
-    swap = round(float(swap.decode("utf-8").replace(",", ".")), 1)
+    swap = psutil.swap_memory()[3]
     return swap
 
 
 def check_memory():
-    full_cmd = "free -t | awk 'NR == 2 {print $3/$2*100}'"
-    memory = subprocess.Popen(full_cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
-    memory = round(float(memory.decode("utf-8").replace(",", ".")))
+    memory = psutil.virtual_memory()[2]
     return memory
+
+def check_mem_bytes():
+    mem_bytes = round(psutil.virtual_memory()[3]/1024/1024, 1)
+    return mem_bytes
 
 
 def check_cpu_temp():
-    full_cmd = "cat /sys/class/thermal/thermal_zone*/temp 2> /dev/null | sed 's/\(.\)..$//' | tail -n 1"
-    try:
-        p = subprocess.Popen(full_cmd, shell=True, stdout=subprocess.PIPE).communicate()[0]
-        cpu_temp = int(p.decode("utf-8").replace('\n', ' ').replace('\r', ''))
-    except Exception:
-        cpu_temp = 0
+    cpu_temp = (psutil.sensors_temperatures(fahrenheit=False)['coretemp'])[0][1]
     return cpu_temp
 
 
 def check_sys_clock_speed():
-    full_cmd = "awk '{printf (\"%0.0f\",$1/1000); }' </sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
-    return int(subprocess.Popen(full_cmd, shell=True, stdout=subprocess.PIPE).communicate()[0])
+    clock_speed = int(psutil.cpu_freq()[0])
+    return clock_speed
 
 
 def check_uptime():
