@@ -107,7 +107,7 @@ def check_cpu_load():
     p = subprocess.Popen("sar -u 1 1|grep Average:", shell=True, stdout=subprocess.PIPE).communicate()[0]
     if not p:
         cpu_load = 0
-        print "Sysstat not found. Install sysstat package"
+        print("Sysstat not found. Install sysstat package")
     else:
         cpu_load = str(p).split("Average:")[1].split("    ")[8].replace(' ', '').replace('\n', '.')[:-3]
         cpu_load = 100 - float(cpu_load)
