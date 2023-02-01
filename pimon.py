@@ -97,10 +97,7 @@ def check_wifi_signal_dbm():
 
 
 def check_diskusage(path):
-    st = os.statvfs(path)
-    free_space = st.f_bavail * st.f_frsize
-    total_space = st.f_blocks * st.f_frsize
-    diskusage = int(100 - ((free_space / total_space) * 100))
+    diskusage = psutil.disk_usage('/')[3]
     return diskusage
 
 
