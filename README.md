@@ -1,29 +1,24 @@
-# Pimon: a Raspberry Pi MQTT system monitor
+# Pimon: a Raspberry/Orange Pi MQTT system monitor
 
-**This is a fork of [hjelev/rpi-mqtt-monitor](https://github.com/hjelev/rpi-mqtt-monitor). See below for an overview of the differences**
+**This is a fork of [kobbejager/pimon](https://github.com/hjelev/rpi-mqtt-monitor). See below for an overview of the differences**
 
-Gather system information and send it to MQTT server. Pimon is written in python and gathers information about your system cpu load, cpu temperature, free space, used memory, swap usage, uptime, wifi signal quality, voltage and system clock speed. The script is written for Raspberry Pi OS but can also be used on any Linux system.
+Gather system information and send it to MQTT server. Pimon is written in python and gathers information about your system cpu load, cpu temperature, free space, used memory, free memory, swap usage, uptime, wifi signal quality, voltage and system clock speed. The script is rewritten for Orange Pi Ubuntu image tested also on x86 Ubuntu 22.04 Server.
 
-Raspberry Pi MQTT monitor integrates with [home assistant](https://www.home-assistant.io/). The script works fine in Python 3 and is very light on the cpu, there are some sleeps in the code due to mqtt communication having problems if the messages are shot with out delay.
+Raspberry/Orange Pi MQTT monitor integrates with [home assistant](https://www.home-assistant.io/). The script works fine in Python 3 and is very light on the cpu, there are some sleeps in the code due to mqtt communication having problems if the messages are shot with out delay.
 
 Each value measured by the script is sent via a separate message for easier creation of home assistant sensors.
 
-## Differences with hjelev/rpi-mqtt-monitor
+## Differences with kobbejager/pimon
 
 Pimon ...
-* is optimised to run in a python venv (better dependency management)
-* uses a YAML configuration file
-* implements a loop (no need to create a cron job)
-* has more MQTT options (better topic prefix, QoS, retain messages)
-* features a bulk output in JSON format
-* removes redunant code
-* was renamed to Pimon, because I like short names ;-)
+* some data collection moved from bash to psutil module
+* Fixed Home Assistant discovery
+* Added memory free in percents and MiB
 
 but ...
 * is Python 3 only (Python 2 was officially depreciated on January 1 2020!)
 * has no automated installation scripts (yet?)
 
-The changes are heavily influenced by the design of [PiJuice MQTT](https://github.com/dalehumby/PiJuice-MQTT).
 
 ## Installation
 
@@ -32,7 +27,7 @@ Not (yet) implemented. If you are not accustomed to install Python software on L
 
 ### Manual Installation
 
-These instructions are tested on Rasberry Pi OS Lite bullseye, 64bit, and might differ a little on other versions of Raspberry Pi Os and Linux.
+These instructions are tested on Orange Pi Ubuntu Jammy, 64bit, and might differ a little on other versions of Raspberry Pi Os and Linux.
 
 Install pip and venv if you don't have it:
 ```bash
@@ -47,8 +42,8 @@ git clone https://github.com/ezhische/pimon.git
 Create the virtual environment and install dependencies:
 ```bash
 cd pimon
-python -m venv venv   # Creating a virtual environment for our application
-source venv/bin/activate  # Activating the virtual environment
+python -m venv .   # Creating a virtual environment for our application
+source bin/activate  # Activating the virtual environment
 pip install -r requirements.txt  # Installing requirements
 ```
 
@@ -70,7 +65,7 @@ python pimon.py
 
 Run the script outside the venv:
 ```bash
-./venv/bin/python pimon.py
+./bin/python pimon.py
 ```
 
 Pimon will run in an infinite loop. Tap Ctrl-C to stop the script.
