@@ -361,6 +361,10 @@ def publish():
             data["swap"] = check_swap()
         if config["messages"]["memory"]:
             data["memory"] = check_memory()
+        if config["messages"]["mem_bytes"]:
+            data["memory"] = check_mem_bytes()
+        if config["messages"]["memfree_bytes"]:
+            data["memory"] = check_memfree_bytes()
         if config["messages"]["uptime"]:
             data["uptime_days"] = check_uptime()
         if config["messages"]["wifi_signal"]:
