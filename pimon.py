@@ -234,7 +234,7 @@ def config_json(what_config):
         data["icon"] = "mdi:memory"
         data["name"] = hostname + " Memory Usage"
         data["unit_of_measurement"] = "MiB"
-    elif what_config == "memfree_bytes":
+    elif what_config == "mem_free_bytes":
         data["icon"] = "mdi:memory"
         data["name"] = hostname + " Memory Free"
         data["unit_of_measurement"] = "MiB"
@@ -364,9 +364,9 @@ def publish():
         if config["messages"]["memory"]:
             data["memory"] = check_memory()
         if config["messages"]["mem_bytes"]:
-            data["memory"] = check_mem_bytes()
-        if config["messages"]["memfree_bytes"]:
-            data["memory"] = check_memfree_bytes()
+            data["mem_bytes"] = check_mem_bytes()
+        if config["messages"]["mem_free_bytes"]:
+            data["mem_free_bytes"] = check_memfree_bytes()
         if config["messages"]["uptime"]:
             data["uptime_days"] = check_uptime()
         if config["messages"]["wifi_signal"]:
