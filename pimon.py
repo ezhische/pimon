@@ -137,7 +137,10 @@ def check_memfree_bytes():
     return memfree_bytes
 
 def check_cpu_temp():
-    cpu_temp = (psutil.sensors_temperatures(fahrenheit=False)['coretemp'])[0][1]
+    try:
+        cpu_temp = (psutil.sensors_temperatures(fahrenheit=False)['coretemp'])[0][1]
+    except KeyError:
+        cpu_temp = (psutil.sensors_temperatures(fahrenheit=False)['cpu_thermal'])[0][1]
     return cpu_temp
 
 
