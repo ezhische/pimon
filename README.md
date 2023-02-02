@@ -74,12 +74,14 @@ Pimon will run in an infinite loop. Tap Ctrl-C to stop the script.
 
 An example Systemd service unit is supplied. Herein, it is assumed that the script was installed in the ```/opt/pimon``` directory. If not, you can change the __3__ occurences of the path in the file ```pimon.service```.
 
+pimonuser chahnge to user wich will run service
+
 Install the service unit in Systemd:
 ```bash
-sudo install -m 644 ./pimon.service /etc/systemd/system/pimon.service
+sudo install -m 644 ./pimon.service /etc/systemd/system/pimon@pimonuser.service
 ```
 
 Enable and activate the service unit:
 ```bash
-sudo systemctl enable --now pimon.service
+sudo systemctl enable --now pimon@pimonuser.service
 ```
