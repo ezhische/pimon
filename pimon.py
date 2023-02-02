@@ -64,6 +64,8 @@ def load_config(config_file):
             "sys_clock_speed": True,
             "swap": True,
             "memory": True,
+            "mem_byetes": True,
+            "mem_free_bytes": True,
             "uptime": True,
             "wifi_signal": False,
             "wifi_signal_dbm": False,
