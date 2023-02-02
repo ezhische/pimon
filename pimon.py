@@ -130,6 +130,9 @@ def check_mem_bytes():
     mem_bytes = round(psutil.virtual_memory()[3]/1024/1024, 1)
     return mem_bytes
 
+def check_memfree_bytes():
+    memfree_bytes = round(psutil.virtual_memory()[1]/1024/1024, 1)
+    return memfree_bytes
 
 def check_cpu_temp():
     cpu_temp = (psutil.sensors_temperatures(fahrenheit=False)['coretemp'])[0][1]
@@ -223,8 +226,16 @@ def config_json(what_config):
         data["unit_of_measurement"] = "%"
     elif what_config == "memory":
         data["icon"] = "mdi:memory"
-        data["name"] = hostname + " Memory Usage"
+        data["name"] = hostname + " Memory Usage(percent)"
         data["unit_of_measurement"] = "%"
+    elif what_config == "mem_bytes":
+        data["icon"] = "mdi:memory"
+        data["name"] = hostname + " Memory Usage"
+        data["unit_of_measurement"] = "MiB"
+    elif what_config == "memfree_bytes":
+        data["icon"] = "mdi:memory"
+        data["name"] = hostname + " Memory Free"
+        data["unit_of_measurement"] = "MiB"
     elif what_config == "sys_clock_speed":
         data["icon"] = "mdi:speedometer"
         data["name"] = hostname + " CPU Clock Speed"

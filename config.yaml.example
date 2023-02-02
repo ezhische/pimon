@@ -33,6 +33,8 @@ messages:
     swap: true
     memory: true
     uptime: true
+    mem_bytes: true
+    mem_free_bytes: true
     # Enable wifi_signal for unit of measuring % or wifi_signal_dbm for unit of meaning dBm
     wifi_signal: false
     wifi_signal_dbm: false
