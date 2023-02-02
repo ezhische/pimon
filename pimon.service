@@ -6,9 +6,9 @@ StartLimitBurst=10
 
 [Service]
 WorkingDirectory=/opt/pimon
-User=pi
+User=%i
 Type=idle
-ExecStart=/opt/pimon/venv/bin/python /opt/pimon/pimon.py
+ExecStart=/opt/pimon/bin/python /opt/pimon/pimon.py
 Restart=always
 RestartSec=30
 
