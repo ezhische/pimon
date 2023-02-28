@@ -23,15 +23,29 @@ but ...
 ## Installation
 
 ### Automated Installation
-Not (yet) implemented. If you are not accustomed to install Python software on Linux/Raspberry Pi, it is advisable to use the original [hjelev/rpi-mqtt-monitor](https://github.com/hjelev/rpi-mqtt-monitor).
+Run this command to use the automated installation:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/ezhische/pimon/master/remote_install.sh)
+```
+Pimon MQTT monitor will be intalled in the /opt/pimon.
+
+The auto-installer needs the software below and will install it if its not found:
+
+python3
+python-pip
+pithon-dev
+git
+
+All dependancies should be handeled by the auto installation. It will also help you configure the host and credentials for the mqtt server in config.yaml and create the sevice for you.
 
 ### Manual Installation
 
 These instructions are tested on Orange Pi Ubuntu Jammy, 64bit, and might differ a little on other versions of Raspberry Pi Os and Linux.
 
-Install pip and venv if you don't have it:
+Install pip and venv and git if you don't have it:
 ```bash
-sudo apt install python3-pip python3-venv
+sudo apt install python3-pip python3-venv git
 ```
 
 Clone the repository:
