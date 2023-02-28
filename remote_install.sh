@@ -11,7 +11,7 @@ welcome(){
 
 install_python(){
   sudo apt update -y
-  sudo apt install -y python3 python3-pip python-dev
+  sudo apt install -y python3 python3-pip python-dev git
 }
 
 printm(){
