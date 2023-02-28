@@ -11,7 +11,7 @@ welcome(){
 
 install_python(){
   sudo apt update -y
-  sudo apt install -y python3 python3-pip python-dev git
+  sudo apt install -y python3 python3-pip python3-dev git
 }
 
 printm(){
@@ -60,7 +60,7 @@ update_config(){
 
   printf "Enter mqtt_password: "
   read PASS
-  sed -i "s/\"mymqttpassword/\"${PASS}/" /opt/pimon/config.yaml
+  sed -i "s/mymqttpassword/${PASS}/" /opt/pimon/config.yaml
 
   printf "Enter mqtt_port (default is 1883): "
   read PORT
