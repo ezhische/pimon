@@ -14,10 +14,10 @@ Pimon ...
 * some data collection moved from bash to psutil module
 * Fixed Home Assistant discovery
 * Added memory free in percents and MiB
+* has automated installation script
 
 but ...
 * is Python 3 only (Python 2 was officially depreciated on January 1 2020!)
-* has no automated installation scripts (yet?)
 
 
 ## Installation
@@ -32,10 +32,10 @@ Pimon MQTT monitor will be intalled in the /opt/pimon.
 
 The auto-installer needs the software below and will install it if its not found:
 
-python3
-python-pip
-pithon-dev
-git
+* python3
+* python-pip
+* pithon-dev
+* git
 
 All dependancies should be handeled by the auto installation. It will also help you configure the host and credentials for the mqtt server in config.yaml and create the sevice for you.
 
