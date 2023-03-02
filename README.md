@@ -34,7 +34,7 @@ The auto-installer needs the software below and will install it if its not found
 
 python3
 python-pip
-pithon-dev
+pithon-venv
 git
 
 All dependancies should be handeled by the auto installation. It will also help you configure the host and credentials for the mqtt server in config.yaml and create the sevice for you.
